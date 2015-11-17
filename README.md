@@ -2,7 +2,8 @@
 Conversion script for turning HR Open Standard wiki .md files into the HTML
 equivalent file. It is meant to be run from the command line in OSX or Linux.
 
-## Usage (assumes this file exists at ~/mdToHTML/convert.py)
+## Usage 
+Aassuming this file exists at ~/mdToHTML/convert.py:
 > cd path/to/md/files
 
 To convert all files in the current directory:
