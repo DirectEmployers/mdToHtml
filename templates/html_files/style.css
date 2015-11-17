@@ -1,0 +1,64 @@
+body
+	{
+		width: 800px;
+		margin: 0 auto;
+		font-family: Arial,Helvetica,Verdana,sans-serif;
+    	color: #000;
+    	font-size: 12px;
+    	line-height: normal;
+	}
+
+h1
+	{
+		color: #5590cc;
+	}
+h1.hropenlogo
+    {
+    background: url('Logo_presentation.jpg') no-repeat top center;
+    height: 150px;
+    width: 800px;
+    text-indent: -9000px;
+    margin-top: 0;
+    }
+
+h2
+	{
+		color: #5590cc;
+	}
+
+h3
+{
+		color: #5590cc;
+	}
+
+
+h4
+{
+		color: #5590cc;
+	}
+
+h5
+{
+		color: #5590cc;
+	}
+.code,code{
+    display: block;
+    background: #FFE;
+    padding: 10px;
+    width: 90%;
+    margin-left: 5%;
+    overflow-x: auto;
+}
+code.inlineCode{
+    display: inline-block;
+    margin-left: 0px;
+    width: auto;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+
+a:link
+	{
+		color: #111111 !important;
+	}
