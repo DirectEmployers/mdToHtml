@@ -64,7 +64,8 @@ for hf in os.listdir(current_path+"/templates/html_files"):
 # convert the files
 for f in file_list:
     output_name = f.split(".")[0]+".html"    
-    md_file = codecs.open(f, mode="r", encoding="utf-8")
+    print output_name
+    md_file = codecs.open(f, mode="r", encoding="utf-8",errors="ignore")
     md_source = md_file.read()
     html_source = markdown.markdown(md_source)
     html_source = "%s%s%s" % (header_source,html_source,footer_source)
