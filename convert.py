@@ -21,7 +21,13 @@ mdToHtml/templates.
 (c) 2015 DirectEmployers Association and HR Open Standards
 
 """
-import markdown, codecs, sys, os, shutil
+import codecs
+import os
+import markdown
+import os
+import re
+import shutil
+import sys
 
 # Path of this file. Ensures proper file placement when called from other dirs
 current_path = os.path.dirname(os.path.realpath(__file__))
@@ -33,7 +39,10 @@ if len(args_list)>0:
     # create list of files to convert and remove existing converted files
     for f in args_list:
         file_list.append(f)
-        os.remove(f.split(".md")[0]+".html")
+        try:
+            os.remove(f.split(".md")[0]+".html")
+        except OSError:
+            pass # file doesn't exist, move on
 else:
     # if no files specified, convert all .md files in the calling folder
     files=os.listdir(".")
@@ -67,6 +76,8 @@ for f in file_list:
     print output_name
     md_file = codecs.open(f, mode="r", encoding="utf-8",errors="ignore")
     md_source = md_file.read()
+    md_source = re.sub(r'\[([\w\s]*)\]\((\w*)\)', r'[\1](\2.html)', md_source)
+    print md_source
     html_source = markdown.markdown(md_source)
     html_source = "%s%s%s" % (header_source,html_source,footer_source)
     html_file = codecs.open(output_name,"w",encoding="utf-8",
