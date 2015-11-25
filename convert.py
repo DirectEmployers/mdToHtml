@@ -71,17 +71,43 @@ for hf in os.listdir(current_path+"/templates/html_files"):
     shutil.copy(current_path+"/templates/html_files/"+hf,"html_files")
 
 # convert the files
+# the first line of the file should be in this list.
+ok_first_char = ["#","@",u"\xa9"]
+#replace list problem unicode chars
+replace_list = [[u"\xa9","&copy;"],]
 for f in file_list:
     output_name = f.split(".")[0]+".html"    
-    print output_name
     md_file = codecs.open(f, mode="r", encoding="utf-8",errors="ignore")
     md_source = md_file.read()
+    # strip invalid start chars to prevent unicode garbage in the output
+    if md_source[0] not in ok_first_char: 
+        md_source = md_source[1:]
+    # replace unicode chars that cause issues
+    for rep in replace_list:
+        md_source = md_source.replace(rep[0],rep[1])
+    # convert md links to hyperlinks
     md_source = re.sub(r'\[([\w\s]*)\]\((\w*)\)', r'[\1](\2.html)', md_source)
-    print md_source
+    
     html_source = markdown.markdown(md_source)
     html_source = "%s%s%s" % (header_source,html_source,footer_source)
+    if output_name == "_Sidebar.html": #sidebar is a special snowflake
+        html_source = html_source.replace(
+            "<body>","<body class='nav'")
+        html_source = html_source.replace(
+            "<h1 class='hropenlogo'>HR Open Standards</h1>","")        
+        html_source = html_source.replace(
+            "<iframe src='_Sidebar.html' name='nav' id='nav'></iframe>","")
+        html_source = html_source.replace(
+            " - <a href","<a class='sidebar sub' target='_top' href")
+        html_source = html_source.replace(
+            "- <a href","<a class='sidebar' target='_top' href")
+        html_source = html_source.replace(
+            "<a href","<a class='sidebar' target='_top' href")
+            
     html_file = codecs.open(output_name,"w",encoding="utf-8",
-                            errors="xmlcharrefreplace")
+                            errors="ignore")
     html_file.write(html_source)
+    # feedback for the processing loop    
+    print "%s.md --> %s complete" % (output_name[0:-5],output_name)
 
 print "Done. %s file(s) converted." % len(file_list) 

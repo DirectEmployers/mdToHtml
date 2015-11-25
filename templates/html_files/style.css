@@ -1,13 +1,29 @@
 body
 	{
-		width: 800px;
+		width: 1030px;
 		margin: 0 auto;
 		font-family: Arial,Helvetica,Verdana,sans-serif;
     	color: #000;
     	font-size: 12px;
     	line-height: normal;
 	}
-
+body.nav{
+    width: auto;
+}
+#nav{
+    width: 200px;
+    margin-right: 20px;
+    float: left;
+    display: block;
+    height: 550px;
+    border: 0;
+}
+.content{
+    float: left;
+    width: 800px;
+    padding: 0;
+    margin: 0;
+}
 h1
 	{
 		color: #5590cc;
@@ -56,9 +72,20 @@ code.inlineCode{
     padding-top: 0px;
     padding-bottom: 0px;
 }
-
-
-a:link
-	{
-		color: #111111 !important;
-	}
+a:link{
+	color: #111111;
+}
+a.sidebar{
+    display: block;
+    padding: 5px;
+    background: #CCF;
+    border: 1px solid #00F;
+}
+a.sidebar:hover{
+    background: #00F;
+    color: #FFF;
+}
+a.sub{
+    border-left-width: 5px;
+}
+	
