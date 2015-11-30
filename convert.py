@@ -86,7 +86,7 @@ for f in file_list:
     for rep in replace_list:
         md_source = md_source.replace(rep[0],rep[1])
     # convert md links to hyperlinks
-    md_source = re.sub(r'\[([\w\s\/\-\_]*)\]\(([\w\-\_]*)\)', r'[\1](\2.html)', md_source)
+    md_source = re.sub(r'\[([\w\s\/\-\_\,]*)\]\(([\w\-\_]*)\)', r'[\1](\2.html)', md_source)
     
     html_source = markdown.markdown(md_source)
     html_source = "%s%s%s" % (header_source,html_source,footer_source)
