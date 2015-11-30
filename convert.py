@@ -86,7 +86,7 @@ for f in file_list:
     for rep in replace_list:
         md_source = md_source.replace(rep[0],rep[1])
     # convert md links to hyperlinks
-    md_source = re.sub(r'\[([\w\s]*)\]\((\w*)\)', r'[\1](\2.html)', md_source)
+    md_source = re.sub(r'\[([\w\s\/]*)\]\((\w*)\)', r'[\1](\2.html)', md_source)
     
     html_source = markdown.markdown(md_source)
     html_source = "%s%s%s" % (header_source,html_source,footer_source)
@@ -103,6 +103,10 @@ for f in file_list:
             "- <a href","<a class='sidebar' target='_top' href")
         html_source = html_source.replace(
             "<a href","<a class='sidebar' target='_top' href")
+        
+    # assumes the json foelder is two levels up.
+    html_source = html_source.replace(
+           'href="../json','href="../../json')
             
     html_file = codecs.open(output_name,"w",encoding="utf-8",
                             errors="ignore")
